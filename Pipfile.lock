@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "d5ad5e6bfca42c9f3f0de6eb2b781e59a2a91fd4e67659fb0c3def6cfdf4bb41"
+            "sha256": "c40c419309374b351e7355b9fc816aa67a151066b8c8f8b39b00cd3ce48398bc"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -99,6 +99,7 @@
                 "sha256:d9459e7237e2e5858738ff9c3e26504b79899b58a6d49e574d352493d80684c6",
                 "sha256:f6689108b1734501d3b59c84427259fd5ac5141afe2e846cfa8598eb811886c9"
             ],
+            "markers": "python_version >= '3.3'",
             "version": "==7.12.0"
         },
         "ipython-genutils": {
@@ -107,6 +108,14 @@
                 "sha256:eb2e116e75ecef9d4d228fdc66af54269afa26ab4463042e33785b887c628ba8"
             ],
             "version": "==0.2.0"
+        },
+        "ipywidgets": {
+            "hashes": [
+                "sha256:13ffeca438e0c0f91ae583dc22f50379b9d6b28390ac7be8b757140e9a771516",
+                "sha256:e945f6e02854a74994c596d9db83444a1850c01648f1574adf144fbbabe05c97"
+            ],
+            "index": "pypi",
+            "version": "==7.5.1"
         },
         "jedi": {
             "hashes": [
@@ -467,6 +476,7 @@
                 "sha256:251ee8440dbda126b8dfa8a7c028eb3f13704898caaef7caa699b35e119301e2",
                 "sha256:fe231261cfcbc6f4a99165455f8f6b9ef4e1032a6e29bccf168b4bf42012f09c"
             ],
+            "index": "pypi",
             "version": "==4.42.1"
         },
         "traitlets": {
@@ -496,6 +506,13 @@
                 "sha256:b36a1c245f2d304965eb4e0a82848379241dc04b865afcc4aab16748587e1923"
             ],
             "version": "==0.5.1"
+        },
+        "widgetsnbextension": {
+            "hashes": [
+                "sha256:079f87d87270bce047512400efd70238820751a11d2d8cb137a5a5bdbaf255c7",
+                "sha256:bd314f8ceb488571a5ffea6cc5b9fc6cba0adaf88a9d2386b93a489751938bcd"
+            ],
+            "version": "==3.5.1"
         },
         "zipp": {
             "hashes": [
@@ -532,6 +549,7 @@
                 "sha256:d9459e7237e2e5858738ff9c3e26504b79899b58a6d49e574d352493d80684c6",
                 "sha256:f6689108b1734501d3b59c84427259fd5ac5141afe2e846cfa8598eb811886c9"
             ],
+            "markers": "python_version >= '3.3'",
             "version": "==7.12.0"
         },
         "ipython-genutils": {

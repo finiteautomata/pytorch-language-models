@@ -11,6 +11,8 @@ jupyterlab = "*"
 numpy = "*"
 torch = "*"
 torchtext = "*"
+tqdm = "*"
+ipywidgets = "*"
 
 [requires]
 python_version = "3.6"
