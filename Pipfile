@@ -5,6 +5,7 @@ verify_ssl = true
 
 [dev-packages]
 ipdb = "*"
+ipywidgets = "*"
 
 [packages]
 jupyterlab = "*"
@@ -13,6 +14,10 @@ torch = "*"
 torchtext = "*"
 tqdm = "*"
 ipywidgets = "*"
+cupy = "*"
+pynvrtc = "*"
+pytorch-qrnn = {git = "https://github.com/salesforce/pytorch-qrnn"}
+pytorch-language-models = {editable = true,path = "."}
 
 [requires]
 python_version = "3.6"
