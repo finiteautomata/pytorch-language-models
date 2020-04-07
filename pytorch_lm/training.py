@@ -4,6 +4,7 @@ import torch
 import math
 import numpy as np
 
+
 def display_lr(lr):
     pow = math.floor(math.log10(lr))
     return f"{lr*(10**(-pow)):.2f}e{pow}"
@@ -17,7 +18,7 @@ def train(model, iterator, optimizer, criterion, clip_norm=None):
 
     model.train()
 
-    epoch_bar = tqdm(iterator, total=len(iterator), ncols=900)
+    epoch_bar = tqdm(iterator, total=len(iterator))
 
     i = 0
     for batch in epoch_bar:
@@ -34,9 +35,11 @@ def train(model, iterator, optimizer, criterion, clip_norm=None):
         loss.backward()
 
         total_norm = 0
+
         for p in model.parameters():
             param_norm = p.grad.data.norm(2)
             total_norm += param_norm.item() ** 2
+
         total_norm = total_norm ** (1. / 2)
 
         if clip_norm:
@@ -80,13 +83,14 @@ def evaluate(model, iterator, criterion):
 
 def training_cycle(model, train_iter, valid_iter, epochs,
                    optimizer, criterion, scheduler, model_path,
-                   early_stopping_tolerance=None, ncols=1000):
-    pbar = tqdm(range(epochs), ncols=1000)
+                   early_stopping_tolerance=None, ncols=None):
 
     best_valid_loss = float('inf')
     epochs_without_improvement = 0
 
-    for epoch in pbar:
+    for epoch in range(epochs):
+        print(f"Epoch {epoch+1}")
+
         train_loss, train_perplexity = train(model, train_iter, optimizer, criterion)
         valid_loss, valid_perplexity = evaluate(model, valid_iter, criterion)
 
@@ -94,8 +98,8 @@ def training_cycle(model, train_iter, valid_iter, epochs,
 
         desc = f' Train Loss: {train_loss:.5f} Perp: {train_perplexity:.3f}'
         desc += f' Val. Loss: {valid_loss:.5f} Perp: {valid_perplexity:.3f}'
-        pbar.set_description(desc)
 
+        print(desc)
         if valid_loss < best_valid_loss:
             best_valid_loss = valid_loss
             epochs_without_improvement = 0

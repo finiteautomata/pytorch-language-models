@@ -111,3 +111,4 @@ embeddings/*
 *.pt
 notebooks/**/.data
 **/.vector_cache
+.data

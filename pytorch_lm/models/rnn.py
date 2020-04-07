@@ -1,14 +1,15 @@
 import torch.nn as nn
 
 class RNNLanguageModel(nn.Module):
-    def __init__(self, vocab_size, embedding_dim, pad_idx, hidden_size,
+    def __init__(self, vocab_size, embedding_dim, pad_idx, hidden_size=256,
                  cell_class=nn.GRU, dropout=0.20):
         super().__init__()
 
-        self.embedding = nn.Embedding(vocab_size, embedding_dim, padding_idx=PAD_IDX)
+        self.embedding = nn.Embedding(vocab_size, embedding_dim, padding_idx=pad_idx)
         self.rnn = cell_class(embedding_dim, hidden_size, batch_first=True)
         self.fc = nn.Linear(hidden_size, vocab_size)
         self.dropout = nn.Dropout(dropout)
+
     def forward(self, inp, hidden=None):
         """
         Inputs are supposed to be just one step (i.e. one letter)

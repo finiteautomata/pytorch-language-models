@@ -18,6 +18,7 @@ cupy = "*"
 pynvrtc = "*"
 pytorch-qrnn = {git = "https://github.com/salesforce/pytorch-qrnn"}
 pytorch-language-models = {editable = true,path = "."}
+fire = "*"
 
 [requires]
 python_version = "3.6"
