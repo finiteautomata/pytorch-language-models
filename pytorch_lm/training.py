@@ -57,7 +57,7 @@ def train(model, iterator, optimizer, criterion, clip_norm=None):
     return epoch_loss / len(iterator), epoch_perplexity / len(iterator)
 
 
-def evaluate(model, iterator, criterion):
+def evaluate(model, iterator, criterion=None):
     """
     Evaluates the model on the given iterator
     """
@@ -71,6 +71,7 @@ def evaluate(model, iterator, criterion):
             preds, _ = model(text)
             preds = preds.view(-1, preds.shape[-1])
 
+            
             loss = criterion(preds, trg)
 
             epoch_loss += loss.item()
