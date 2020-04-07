@@ -121,7 +121,7 @@ def train_lm(
     model = model.to(device)
     criterion = criterion.to(device)
 
-    model_path = "/tmp/lang_model.pt"
+    model_path = output_path
 
     training_cycle(
         epochs=epochs,
