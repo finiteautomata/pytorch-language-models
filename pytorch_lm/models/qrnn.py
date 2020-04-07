@@ -1,5 +1,8 @@
 import torch.nn as nn
 from torchqrnn import QRNN
+import warnings
+# QRNN warnings...
+warnings.filterwarnings('ignore')
 
 
 class QRNNLanguageModel(nn.Module):

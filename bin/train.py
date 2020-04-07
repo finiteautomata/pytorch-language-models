@@ -10,17 +10,16 @@ import torch.optim as optim
 import torchtext
 from torchtext import data
 from torchtext.datasets import WikiText2
-from pytorch_lm.models import RNNLanguageModel
+from pytorch_lm.models import RNNLanguageModel, QRNNLanguageModel
 from pytorch_lm.training import evaluate, training_cycle
 from pytorch_lm.saving import save_model, load_model
 
-
 AVAILABLE_MODELS = {
-    "rnn": RNNLanguageModel
+    "rnn": RNNLanguageModel,
+    "qrnn": QRNNLanguageModel,
 }
 
 def create_model(model_name, TEXT, model_args):
-
     if model_name not in AVAILABLE_MODELS:
         raise ValueError(f"{model_name} not valid; must be one of {AVAILABLE_MODELS.keys()}")
     print(f"Creating model {model_name}...\n")
@@ -60,7 +59,7 @@ def create_optimizer(model, optimizer, lr):
 def train_lm(
     model_name, output_path, epochs=5, batch_size=32, bptt_len=35,
     lr=1e-3, optimizer="adam", min_freq=5, model_args={},
-    scheduler_patience=5, scheduler_threshold=1e-4):
+    scheduler_patience=5, scheduler_threshold=1e-4, early_stopping_tolerance=5):
     """
     Train and save a language model
     Arguments
@@ -128,7 +127,7 @@ def train_lm(
         epochs=epochs,
         model=model, train_iter=train_iter, valid_iter=valid_iter,
         optimizer=optimizer, criterion=criterion, scheduler=lr_scheduler,
-        model_path=model_path, early_stopping_tolerance=3
+        model_path=model_path, early_stopping_tolerance=early_stopping_tolerance
     )
 
     model.load_state_dict(torch.load(model_path))
