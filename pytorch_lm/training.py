@@ -1,4 +1,3 @@
-# %load ../pytorch_lm/training.py
 from tqdm.auto import tqdm
 import torch
 import math
@@ -71,7 +70,7 @@ def evaluate(model, iterator, criterion=None):
             preds, _ = model(text)
             preds = preds.view(-1, preds.shape[-1])
 
-            
+
             loss = criterion(preds, trg)
 
             epoch_loss += loss.item()

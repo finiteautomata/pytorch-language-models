@@ -7,12 +7,15 @@ warnings.filterwarnings('ignore')
 
 class QRNNLanguageModel(nn.Module):
     def __init__(self, vocab_size, embedding_dim, pad_idx, hidden_size,
-                 cell_class=nn.GRU, dropout=0.20, zoneout=.0):
+                 num_layers=2, dropout=0.20, zoneout=.0):
         super().__init__()
 
         self.embedding = nn.Embedding(vocab_size, embedding_dim, padding_idx=pad_idx)
 
-        self.qrnn = QRNN(embedding_dim, hidden_size, num_layers=2, window=2, dropout=dropout, zoneout=zoneout)
+        self.qrnn = QRNN(
+            embedding_dim, hidden_size, num_layers=num_layers,
+            window=2, dropout=dropout, zoneout=zoneout
+        )
         #self.rnn = cell_class(embedding_dim, hidden_size, batch_first=True)
 
         self.fc = nn.Linear(hidden_size, vocab_size)
