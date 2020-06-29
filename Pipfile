@@ -19,6 +19,7 @@ pynvrtc = "*"
 pytorch-qrnn = {git = "https://github.com/salesforce/pytorch-qrnn"}
 pytorch-language-models = {editable = true,path = "."}
 fire = "*"
+fastai = "*"
 
 [requires]
 python_version = "3.6"

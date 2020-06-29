@@ -26,7 +26,7 @@ def train(model, iterator, optimizer, criterion, clip_norm=None):
         text = batch.text
         trg = batch.target.view(-1)
 
-        preds, _ = model(text)
+        preds = model(text)[0]
         preds = preds.view(-1, preds.shape[-1])
 
         loss = criterion(preds, trg)
@@ -36,8 +36,9 @@ def train(model, iterator, optimizer, criterion, clip_norm=None):
         total_norm = 0
 
         for p in model.parameters():
-            param_norm = p.grad.data.norm(2)
-            total_norm += param_norm.item() ** 2
+            if p.grad is not None:
+                param_norm = p.grad.data.norm(2)
+                total_norm += param_norm.item() ** 2
 
         total_norm = total_norm ** (1. / 2)
 
@@ -67,7 +68,7 @@ def evaluate(model, iterator, criterion=None):
             text = batch.text
             trg = batch.target.view(-1)
 
-            preds, _ = model(text)
+            preds = model(text)[0]
             preds = preds.view(-1, preds.shape[-1])
 
 

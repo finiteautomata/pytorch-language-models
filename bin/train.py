@@ -10,13 +10,14 @@ import torch.optim as optim
 import torchtext
 from torchtext import data
 from torchtext.datasets import WikiText2
-from pytorch_lm.models import RNNLanguageModel, QRNNLanguageModel
+from pytorch_lm.models import RNNLanguageModel, QRNNLanguageModel, AWDLanguageModel
 from pytorch_lm.training import evaluate, training_cycle
 from pytorch_lm.saving import save_model, load_model
 
 AVAILABLE_MODELS = {
     "rnn": RNNLanguageModel,
     "qrnn": QRNNLanguageModel,
+    "awd": AWDLanguageModel,
 }
 
 def create_model(model_name, TEXT, model_args):
@@ -26,10 +27,9 @@ def create_model(model_name, TEXT, model_args):
 
     PAD_IDX = TEXT.vocab.stoi["<pad>"]
     UNK_IDX = TEXT.vocab.stoi["<unk>"]
-
+    print(model_args)
     model_args["pad_idx"] = PAD_IDX
-    model_args["embedding_dim"] = TEXT.vocab.vectors.shape[1]
-    model_args["vocab_size"] = TEXT.vocab.vectors.shape[0]
+    model_args["vocab_size"] = len(TEXT.vocab.stoi)
 
     model = AVAILABLE_MODELS[model_name](**model_args)
 
@@ -44,6 +44,7 @@ def create_optimizer(model, optimizer, lr):
     optimizers = {
         "adam": optim.Adam,
         "sgd": optim.SGD,
+        "asgd": optim.ASGD,
     }
 
     if optimizer not in optimizers:
@@ -93,7 +94,7 @@ def train_lm(
 
     train, valid, test = WikiText2.splits(TEXT)
 
-    TEXT.build_vocab(train, vectors="glove.6B.300d", min_freq=min_freq)
+    TEXT.build_vocab(train, min_freq=min_freq)
 
     print(f"We have {len(TEXT.vocab)} tokens in our vocabulary")
 
@@ -109,7 +110,8 @@ def train_lm(
     )
 
     model = create_model(model_name, TEXT, model_args=model_args)
-
+    if "awd" in model_name:
+        optimizer = "asgd"
     optimizer = create_optimizer(model, optimizer, lr)
     criterion = nn.CrossEntropyLoss()
 
