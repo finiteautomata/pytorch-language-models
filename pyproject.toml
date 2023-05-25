@@ -1,0 +1,29 @@
+[tool.poetry]
+name = "pytorch-language-models"
+version = "0.1.0"
+description = ""
+authors = ["Juan Manuel Pérez <jmperez.85@gmail.com>"]
+readme = "README.md"
+packages = [{include = "pytorch_lm"}]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+transformers = "^4.29.2"
+torch = "^2.0.1"
+datasets = "^2.12.0"
+evaluate = "^0.4.0"
+accelerate = "^0.19.0"
+tokenizers = "^0.13.3"
+
+
+[tool.poetry.dev-dependencies]
+fire = "^0.4.0"
+pytest = "^6.2.5"
+scikit-learn = "*"
+ipykernel = "^6.18.0"
+ipywidgets = ">=7.0, <8.0"
+protobuf = "<= 3.20.1"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
