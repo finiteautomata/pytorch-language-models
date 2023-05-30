@@ -112,3 +112,4 @@ embeddings/*
 notebooks/**/.data
 **/.vector_cache
 .data
+**/runs/*
