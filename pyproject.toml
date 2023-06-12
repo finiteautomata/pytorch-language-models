@@ -24,7 +24,7 @@ pytest = "^6.2.5"
 scikit-learn = "*"
 ipykernel = "^6.18.0"
 ipywidgets = ">=7.0, <8.0"
-protobuf = "<= 3.20.1"
+protobuf = "<=3.20.2"
 
 [build-system]
 requires = ["poetry-core"]
